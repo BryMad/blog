@@ -1,6 +1,6 @@
 # A Blog Starter App
 
-This is a trivial blog app, started with create-react-app.
+This is a trivial blog app, started with create-react-app done as a project in a class.
 
 It works entirely within memory, so reloads blow everything away except for the first two mock articles.
 
