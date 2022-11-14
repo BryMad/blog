@@ -35,19 +35,17 @@ export default function App() {
   return (
     <div className="App">
       <header>
-        Blog Testing
+        Blog
         {user && <button onClick={() => setWriting(true)}>New Article</button>}
         {!user ? <SignIn /> : <SignOut />}
       </header>
-
       {!user ? "" : <Nav articles={articles} setArticle={setArticle} />}
-
       {!user ? (
         ""
       ) : writing ? (
         <ArticleEntry addArticle={addArticle} />
       ) : (
-        <Article article={article} />
+        <Article article={article} setArticle={setArticle} articles={articles} setArticles={setArticles} />
       )}
     </div>
   );

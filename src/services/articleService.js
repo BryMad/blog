@@ -11,12 +11,19 @@ import {
   orderBy,
   limit,
   Timestamp,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 
 export async function createArticle({ title, body }) {
   const data = { title, body, date: Timestamp.now() };
   const docRef = await addDoc(collection(db, "articles"), data);
   return { id: docRef.id, ...data };
+}
+
+export async function deleteArticle(id) {
+  let result = doc(db, `articles/${id}`);
+  deleteDoc(result);
 }
 
 // NOT FINISHED: This only gets the first 20 articles. In a real app,
