@@ -22,7 +22,7 @@ export async function createArticle({ title, body }) {
 }
 
 export async function deleteArticle(id) {
-  let result = doc(db, `articles/${id}`);
+  const result = doc(db, `articles/${id}`);
   deleteDoc(result);
 }
 
@@ -32,8 +32,7 @@ export async function fetchArticles() {
   const snapshot = await getDocs(
     query(collection(db, "articles"), orderBy("date", "desc"), limit(20))
   );
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  return snapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  });
 }
