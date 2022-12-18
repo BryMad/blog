@@ -22,10 +22,6 @@ export default function App() {
     if (user) {
       fetchArticles().then((data) => {
         setArticles(data);
-        if (article) {
-          const updatedArticle = data.find((item) => item.id === article.id);
-          setArticle(updatedArticle);
-        }
       });
     }
   }, [user, updates]);
@@ -49,9 +45,7 @@ export default function App() {
       <header>
         Blog
         {user && (
-          <button onClick={() => setWriting(!writing)} className="button">
-            {!writing ? "New Article" : "Cancel"}
-          </button>
+          <button onClick={() => setWriting(!writing)}>{!writing ? "New Article" : "Cancel"}</button>
         )}
         {!user ? <SignIn /> : <SignOut />}
       </header>
