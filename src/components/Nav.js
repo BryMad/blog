@@ -1,6 +1,4 @@
 export default function Nav({ articles, setArticle }) {
-
-
   return (
     <nav>
       {!articles

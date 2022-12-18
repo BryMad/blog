@@ -1,5 +1,6 @@
-import { deleteArticle } from "../services/articleService";
-import { useState } from "react";
+import { deleteArticle, editArticle } from "../services/articleService";
+import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 
 export default function Article({
   article,
@@ -9,7 +10,13 @@ export default function Article({
   updateReceived,
 }) {
   const [showEdit, setShowEdit] = useState(false);
-  const [body, setBody] = useState(article?.body);
+  const [body, setBody] = useState("");
+
+  useEffect(() => {
+    if (article) {
+      setBody(article.body);
+    }
+  }, [article]);
 
   async function handleDelete(id) {
     try {
@@ -22,7 +29,21 @@ export default function Article({
   }
 
   async function handleEditSubmit(e) {
+    console.log(e);
     e.preventDefault();
+    try {
+      await editArticle({
+        body: body,
+        date: article.date,
+        id: article.id,
+        title: article.title,
+      });
+      setShowEdit(false);
+      updateReceived();
+      console.log("It worked!");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -32,25 +53,31 @@ export default function Article({
       ) : article && !showEdit ? (
         <section>
           <h2>{article.title}</h2>
-          <p className="date">{`Posted: ${article.date}`}</p>
+          <p className="date">{`Posted: ${dayjs(Date(article.date)).format(
+            "DD/MM/YYYY"
+          )}`}</p>
           <p className="body">{article.body}</p>
-          <button onClick={() => handleDelete(article.id)}>Delete</button>
-          <button onClick={() => setShowEdit(!showEdit)}>
+          <button onClick={() => handleDelete(article.id)} className="button">
+            Delete
+          </button>
+          <button onClick={() => setShowEdit(!showEdit)} className="button">
             {!showEdit ? "edit" : "cancel"}
           </button>
         </section>
       ) : (
         <form onSubmit={handleEditSubmit}>
           <h2>{article.title}</h2>
-          <p className="date">{`Posted: ${article.date}`}</p>
-          <input value={body} onChange={(e) => setBody(e.target.value)} />
-
-          {/* <textarea
+          <p className="date">{`Posted: ${dayjs(Date(article.date)).format(
+            "DD/MM/YYYY"
+          )}`}</p>
+          {/* <input value={body} onChange={(e) => setBody(e.target.value)} /> */}
+          <textarea
             rows="8"
             value={body}
-            onChange={(e) => setBody(e.target.value)}
-          ></textarea> */}
-
+            onChange={(e) => {
+              setBody(e.target.value);
+            }}
+          ></textarea>
           <button type="submit">Submit Edit</button>
         </form>
       )}
