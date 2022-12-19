@@ -13,6 +13,7 @@ import {
   Timestamp,
   deleteDoc,
   doc,
+  setDoc,
 } from "firebase/firestore";
 
 export async function createArticle({ title, body }) {
@@ -24,6 +25,16 @@ export async function createArticle({ title, body }) {
 export async function deleteArticle(id) {
   const result = doc(db, `articles/${id}`);
   deleteDoc(result);
+}
+
+export async function editArticle({ article, body }) {
+  const result = doc(db, "articles", article.id);
+  console.log("editArticle().result = ", result);
+  await setDoc(result, {
+    title: article.title,
+    body: body,
+    date: Timestamp.now(),
+  });
 }
 
 // NOT FINISHED: This only gets the first 20 articles. In a real app,

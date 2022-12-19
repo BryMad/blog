@@ -1,18 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
 .App {
   display: grid;
   grid-template-rows: min-content auto;
   grid-template-columns: 250px auto;
+  font-family: "Caveat Brush", cursive;
   height: 100vh;
   overflow: scroll;
+  color: rgb(6, 149, 205);
 }
 
 header {
   display: flex;
   justify-content: space-between;
   background-color: black;
-  color: white;
   grid-column: 1 / span 2;
-  padding: 10px 5px;
+  padding: 10px 20px;
+  align-items: center;
+  font-size: 3rem;
 }
 
 form {
@@ -34,8 +47,33 @@ article {
   padding: 10px;
 }
 
+article {
+  /* display: flex; */
+  /* align-items: center;
+  justify-content: center; */
+  color: rgb(6, 149, 205);
+  padding: 30px;
+
+  background-image: url(https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80);
+  background-repeat: repeat;
+  font-family: "Caveat Brush", cursive;
+  font-size: 3rem;
+}
+
 nav {
-  background-color: #dee9ff;
+  padding-left: 20px;
+  font-size: 4rem;
+  color: salmon;
+  text-shadow: 0 0 3px #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(https://img.freepik.com/free-photo/blue-textured-brick-wall-background_53876-63585.jpg?w=826&t=st=1671400599~exp=1671401199~hmac=8ae1337fbb80550fc2b486d8dfc9219294a5ddec3d3bff2dc14c7566df83f2ea);
+  background-size: 400%;
+}
+
+nav p {
+  margin: 15px 0px;
 }
 
 nav p:hover {
@@ -51,8 +89,44 @@ article .body {
   white-space: break-spaces;
 }
 
+article h2 {
+  margin-left: 20px;
+}
+
+article p {
+  margin-left: 20px;
+}
+
 .error {
   background-color: red;
   color: gold;
   padding: 5px;
+}
+
+button {
+  font-family: "Caveat Brush", cursive;
+  color: rgb(6, 149, 205);
+  font-size: 2rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  margin: 10px;
+  min-width: 70px;
+}
+
+button:hover {
+  transform: scale(1.1);
+  transition: 0.2s all;
+}
+
+p,
+h1,
+h2 {
+  margin: 10px 0;
+}
+
+.Entry {
+  font-size: 3rem;
+  background-image: url(https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80);
+  background-repeat: repeat;
 }

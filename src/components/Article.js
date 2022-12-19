@@ -1,15 +1,18 @@
-import { deleteArticle } from "../services/articleService";
+import { deleteArticle, editArticle } from "../services/articleService";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 export default function Article({
   article,
   setArticle,
   articles,
   setArticles,
+  body,
+  setBody,
   updateReceived,
+  title,
 }) {
   const [showEdit, setShowEdit] = useState(false);
-  const [body, setBody] = useState(article?.body);
 
   async function handleDelete(id) {
     try {
@@ -23,6 +26,14 @@ export default function Article({
 
   async function handleEditSubmit(e) {
     e.preventDefault();
+    setShowEdit(!showEdit);
+    try {
+      await editArticle({ article, body });
+      setArticle(null);
+      updateReceived();
+    } catch (error) {
+      console.log("handleEdit issue: " + error);
+    }
   }
 
   return (
@@ -32,7 +43,9 @@ export default function Article({
       ) : article && !showEdit ? (
         <section>
           <h2>{article.title}</h2>
-          <p className="date">{`Posted: ${article.date}`}</p>
+          <p className="date">{`Posted: ${dayjs(Date(article.date)).format(
+            "DD/MM/YYYY"
+          )}`}</p>
           <p className="body">{article.body}</p>
           <button onClick={() => handleDelete(article.id)}>Delete</button>
           <button onClick={() => setShowEdit(!showEdit)}>
@@ -42,15 +55,10 @@ export default function Article({
       ) : (
         <form onSubmit={handleEditSubmit}>
           <h2>{article.title}</h2>
-          <p className="date">{`Posted: ${article.date}`}</p>
+          <p className="date">{`Posted: ${dayjs(Date(article.date)).format(
+            "DD/MM/YYYY"
+          )}`}</p>
           <input value={body} onChange={(e) => setBody(e.target.value)} />
-
-          {/* <textarea
-            rows="8"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          ></textarea> */}
-
           <button type="submit">Submit Edit</button>
         </form>
       )}

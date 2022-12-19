@@ -12,6 +12,8 @@ export default function App() {
   const [writing, setWriting] = useState(false);
   const user = useAuthentication();
   const [updates, setUpdates] = useState(0);
+  const [body, setBody] = useState("");
+  const [title, setTitle] = useState("");
 
   // This is a trivial app, so just fetch all the articles only when
   // a user logs in. A real app would do pagination. Note that
@@ -45,11 +47,23 @@ export default function App() {
       <header>
         Blog
         {user && (
-          <button onClick={() => setWriting(!writing)}>{!writing ? "New Article" : "Cancel"}</button>
+          <button onClick={() => setWriting(!writing)}>
+            {!writing ? "New Article" : "Cancel"}
+          </button>
         )}
         {!user ? <SignIn /> : <SignOut />}
       </header>
-      {!user ? "" : <Nav articles={articles} setArticle={setArticle} />}
+      {!user ? (
+        ""
+      ) : (
+        <Nav
+          articles={articles}
+          setArticle={setArticle}
+          updateReceived={updateReceived}
+          setBody={setBody}
+          setTitle={setTitle}
+        />
+      )}
       {!user ? (
         ""
       ) : writing ? (
@@ -61,6 +75,9 @@ export default function App() {
           articles={articles}
           setArticles={setArticles}
           updateReceived={updateReceived}
+          body={body}
+          setBody={setBody}
+          title={title}
         />
       )}
     </div>
