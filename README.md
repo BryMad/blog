@@ -2,6 +2,14 @@
 
 This is a trivial blog app, started with create-react-app done as a project in a class.
 
-It works entirely within memory, so reloads blow everything away except for the first two mock articles.
+Working from Dr. Toal's starter code I have added:
 
-This repo is designed for you to fork and extend with (1) better CSS and (2) a real back end, with authentication and a database.
+- edit functionality
+- delete functionality
+- a way to cancel out of "new article" creation (that's kind of janky, but still learning here!)
+- improve date display for articles
+- CSS styling
+
+Site is deployed [here](https://blog-2d74d.web.app)
+
+Github repo is [here](https://github.com/BryMad/blog)
